@@ -1,11 +1,13 @@
-import matplotlib.pyplot as fig
+import matplotlib as mp
+import matplotlib.pyplot as plt
 import datetime as dt
 import pandas_datareader.data as web
+import yfinance as yf
 
+yf.pdr_override()
 
-inicio = dt.datetime(2019,1,1)
-fim = dt.datetime(2019,11,24)
-df = web.DataReader('PETR4.SA','yahoo',inicio,fim)
-df['Close'].plot(color='k',lw=4)
-fig.grid()
-fig.title('PETR4 (Jan-Nov / 2019)',fontsize=18,weight='bold')
+df = web.get_data_yahoo('PETR4.SA',start='2019-01-01',end='2019-11-24')
+df['Close'].plot(color='black',lw=4)
+plt.grid()
+plt.show()
+print(df['Close'].head(5))
